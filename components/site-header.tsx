@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ChevronDown, Menu, X, Trees } from 'lucide-react'
 import { navItems } from '@/lib/site'
 import { cn } from '@/lib/utils'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -72,15 +73,18 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-foreground lg:hidden"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? 'Stäng meny' : 'Öppna meny'}
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md p-2 text-foreground lg:hidden"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? 'Stäng meny' : 'Öppna meny'}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile nav */}

@@ -4,6 +4,7 @@ import { Geist, Fraunces } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const fraunces = Fraunces({
@@ -33,11 +34,19 @@ export default function RootLayout({
     <html
       lang="sv"
       className={`${geistSans.variable} ${fraunces.variable} bg-background`}
+      suppressHydrationWarning
     >
       <body className="font-sans antialiased flex min-h-screen flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
